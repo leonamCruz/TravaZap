@@ -19,21 +19,6 @@ public class TravaZap {
         copiarTrava();
         zap.get("https://web.whatsapp.com");
     }
-    private void copiarTrava(){
-        zap.get(URL_DA_TRAVA);
-        Actions actions = new Actions(zap);
-        zap.findElement(By.xpath(XPATH_DA_TRAVA)).click();
-        actions.keyDown(Keys.CONTROL);
-        actions.sendKeys("a");
-        actions.keyUp(Keys.CONTROL);
-        actions.build().perform();
-
-        actions = new Actions(zap);
-        actions.keyDown(Keys.CONTROL);
-        actions.sendKeys("c");
-        actions.keyUp(Keys.CONTROL);
-        actions.build().perform();
-    }
     private void contador(){
         int i = 30;
         while (i >= 0){
@@ -49,12 +34,27 @@ public class TravaZap {
     private void abrirContato(){
         zap.findElement(By.xpath(USER_SELECTED)).click();
     }
+    private void copiarTrava(){
+        zap.get(URL_DA_TRAVA);
+        Actions actions = new Actions(zap);
+        zap.findElement(By.xpath(XPATH_DA_TRAVA)).click();
+        actions.keyDown(Keys.CONTROL);
+        actions.sendKeys("a");
+        actions.keyUp(Keys.CONTROL);
+        actions.build().perform();
+
+        actions = new Actions(zap);
+        actions.keyDown(Keys.CONTROL);
+        actions.sendKeys("c");
+        actions.keyUp(Keys.CONTROL);
+        actions.build().perform();
+    }
 
     private void clickNaMensagem(){
         zap.findElement(By.xpath(BOX_MESSAGE)).click();
     }
 
-    private void lacoDeMensagens(){
+    private boolean lacoDeMensagens(){
         Actions actions = new Actions(zap);
         clickNaMensagem();
         for(int i = 0; i < 10; i++){
@@ -71,8 +71,9 @@ public class TravaZap {
             zap.findElement(By.xpath(BOX_MESSAGE)).sendKeys(Keys.ENTER);
         }
         System.out.println("Obrigado por travar o zap da rapaziada");
+        return true;
     }
-    public void zapTravaTudo() {
+    public boolean zapTravaTudo() {
         setup();
         contador();
 
@@ -83,6 +84,6 @@ public class TravaZap {
             System.out.println("Houve alguma falha...");
             System.exit(0);
         }
-        lacoDeMensagens();
+        return lacoDeMensagens();
     }
 }
