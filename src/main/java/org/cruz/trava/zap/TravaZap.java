@@ -67,6 +67,7 @@ public class TravaZap {
                 Thread.sleep(25000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                return false;
             }
             zap.findElement(By.xpath(BOX_MESSAGE)).sendKeys(Keys.ENTER);
         }
